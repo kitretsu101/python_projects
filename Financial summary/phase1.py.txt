@@ -1,0 +1,93 @@
+transactions=[]
+
+def add_income():
+    amount=float(input("Enter income amount: "))
+    category= input("Enter category: ")
+    description= input("Enter description: ")
+    
+    transaction={
+        "type":"income",
+        "amount": amount,
+        "category": category,
+        "description": description
+    }
+    
+    transactions.append(transaction)
+    print("income added")
+
+
+def add_expense():
+    amount= float(input("Enter expenses: "))
+    category= input("Enter category: ")
+    description= input("Enter description: ")
+    
+    transaction={
+        "type":"expense",
+        "amount": amount,
+        "category": category,
+        "description": description
+    }
+    
+    transactions.append(transaction)
+    print("Expenses added")
+    
+def view_transactions():
+    if len(transactions)==0:
+        print("\nNo transactions yet...")
+        return
+    
+    for index,transaction in enumerate(transactions,1):
+        print(f"\nTransaction {index}")
+        print(f"Type       : {transaction['type'].upper()}")
+        print(f"Amount     : ৳{transaction['amount']:.2f}")
+        print(f"Category   : {transaction['category']}")
+        print(f"Description: {transaction['description']}")
+
+def show_balance():
+    total_income=0
+    total_expense=0
+    
+    for transaction in transactions:
+        if transaction['type']=="income":
+            total_income += transaction["amount"]
+            
+        elif transaction["type"] == "expense":
+            total_expense += transaction["amount"]
+    
+    balance = total_income - total_expense
+
+    print(f"Total Income : ৳{total_income:.2f}")
+    print(f"Total Expense: ৳{total_expense:.2f}")  
+    print(f"Balance      : ৳{balance:.2f}")
+
+def show_menu():
+    print("\n1. Add Income")
+    print("2. Add Expense")
+    print("3. View Transactions")
+    print("4. Show Balance")
+    print("5. Exit")
+
+while True:
+    show_menu()
+    
+    choice=input("\nEnter your choice: ")
+    if choice == "1":
+        add_income()
+
+    elif choice == "2":
+        add_expense()
+
+    elif choice == "3":
+        view_transactions()
+
+    elif choice == "4":
+        show_balance()
+
+    elif choice == "5":
+        print("\nThank you for using Personal Finance Manager!")
+        break
+
+    else:
+        print("\nInvalid choice. Please try again.")
+        
+    
